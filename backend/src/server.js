@@ -17,6 +17,6 @@ app.listen(3000, async () => {
     await pool.query("SELECT 1");
     console.log("Serveur démarré et base de donné connectée ✅ ");
   } catch (error) {
-    console.log("Erreur de connetion à la base de donnée ❌");
+    console.log("Erreur de connetion à la base de donnée ❌", error.message);
   }
 });

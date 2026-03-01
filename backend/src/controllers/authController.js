@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import pool from "./config/database.js";
+import pool from "../config/database.js";
 
 export const register = async (req, res) => {
   try {
