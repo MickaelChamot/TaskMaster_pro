@@ -76,7 +76,11 @@ export const login = async (req, res) => {
     res.status(200).json({
       message: "Confirmation validé",
       token,
-      user: resultat.rows[0],
+      user: {
+        id: resultat.rows[0].id,
+        email: resultat.rows[0].email,
+        created_at: resultat.rows[0].created_at,
+      },
     });
   } catch (error) {
     res.status(500).json({ message: "Erreur serveur", error: error.message });
