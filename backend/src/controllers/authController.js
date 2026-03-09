@@ -21,7 +21,7 @@ export const register = async (req, res) => {
     // 3. Enregistrer l'utilisateur en base de données
     const newUser = await pool.query(
       " INSERT INTO users (email, password) VALUES ($1,$2) RETURNING id, email, created_at ",
-      [email, hashedPassword]
+      [email, hashedPassword],
       // Insère dans la table users un nouvel enregistrement avec l'email et le mot de passe hashé, et renvoie moi les données insérées
     );
     // 4. Créer un token
@@ -58,7 +58,7 @@ export const login = async (req, res) => {
     // 3. Vérifier que le mot de passe correspond au hash stocké
     const validPassword = await bcrypt.compare(
       password,
-      resultat.rows[0].password
+      resultat.rows[0].password,
     );
     // 4. Si le mot de passe est incorrect, renvoyer une erreur
     if (!validPassword) {
@@ -70,7 +70,7 @@ export const login = async (req, res) => {
     const token = jwt.sign(
       { id: resultat.rows[0].id },
       process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRES_IN }
+      { expiresIn: process.env.JWT_EXPIRES_IN },
     );
     // 6  Renvoyer une confirmation avec le token
     res.status(200).json({
