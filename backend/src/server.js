@@ -1,12 +1,14 @@
 import express from "express";
 import pool from "./config/database.js";
 import router from "./routes/authRoutes.js";
+import taskRouter from "./routes/taskRoutes.js";
 
 const app = express();
 
 app.use(express.json());
 
 app.use("/api/auth", router);
+app.use("/api/tasks", taskRouter);
 
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });

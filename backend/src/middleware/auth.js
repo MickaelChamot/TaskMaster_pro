@@ -8,6 +8,7 @@ export const authMiddleware = (req, res, next) => {
     // 1. Récupérer le token dans le header Authorization
 
     const authHeader = req.headers.authorization; // Récupère l'en-tête Authorization de la requête c'est dire cherche l'information d'autorisation "le token "
+    console.log("Header reçu:", authHeader);
 
     if (!authHeader) {
       return res.status(401).json({ message: "Access denied" });
@@ -28,7 +29,7 @@ export const authMiddleware = (req, res, next) => {
 
     // 5. Si valide → next() pour continuer
     next(); // Tout est ok, on passe au controller suivant.
-    
+
     // 6. Si invalide → erreur 401
   } catch (error) {
     res.status(401).json({ message: "Invalid Token" });
